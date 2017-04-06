@@ -1,4 +1,4 @@
-# animate-on-scroll
+# ng2-animate-on-scroll
 
 A very simple Angular directive with no dependencies that allows you to add CSS animations on elements, once that element has been reached via scrolling the page.  Works with whatever CSS animation you choose, including Animate.css as shown in examples.
 
@@ -7,7 +7,7 @@ A very simple Angular directive with no dependencies that allows you to add CSS 
 To install the directive in your project, run:
 
 ```bash
-$ npm install animate-on-scroll --save
+$ npm install ng2-animate-on-scroll --save
 ```
 
 ## Using the directive
@@ -21,7 +21,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 // import third-party module
-import { AnimateOnScrollModule } from 'animate-on-scroll';
+import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
 
 @NgModule({
   declarations: [

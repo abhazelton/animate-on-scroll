@@ -1,6 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AnimateOnScrollDirective } from './src';
+import { AnimateOnScrollDirective, ScrollService } from './src';
 
 export * from './src/animate-on-scroll.directive';
 
@@ -18,7 +18,8 @@ export * from './src/animate-on-scroll.directive';
 export class AnimateOnScrollModule {
   static forRoot(): ModuleWithProviders {
     return {
-      ngModule: AnimateOnScrollModule
+      ngModule: AnimateOnScrollModule,
+      providers: [ ScrollService ]
     };
   }
 }
