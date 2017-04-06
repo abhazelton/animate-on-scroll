@@ -31,7 +31,7 @@ import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
     BrowserModule,
 
     // import module here
-    AnimateOnScrollModule
+    AnimateOnScrollModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -60,6 +60,11 @@ The `animationName` attribute is for the name of the CSS class to be added at th
 
 </div>
 ```
+
+## Demo
+
+An example of usage of the directory can be found at:
+[https://github.com/abhazelton/animate-on-scroll-test](https://github.com/abhazelton/animate-on-scroll-test)
 
 ## License
 
