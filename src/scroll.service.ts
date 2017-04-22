@@ -1,12 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/takeUntil';
 
 @Injectable()
-export class ScrollService {
+export class ScrollService implements OnDestroy {
 
   scrollObs: Observable<any>;
   resizeObs: Observable<any>;
   pos: number;
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   constructor() {
 
@@ -17,22 +20,29 @@ export class ScrollService {
     this.scrollObs = Observable.fromEvent(window, 'scroll');
 
     // initiate subscription to update values
-    this.scrollObs.subscribe(() => this.manageScrollPos());
+    this.scrollObs.takeUntil(this.ngUnsubscribe)
+                  .subscribe(() => this.manageScrollPos());
 
     // create observable for changes in screen size
     this.resizeObs = Observable.fromEvent(window, 'resize');
 
     // initiate subscription to update values
-    this.resizeObs.subscribe(() => this.manageScrollPos());
+    this.resizeObs.takeUntil(this.ngUnsubscribe)
+                  .subscribe(() => this.manageScrollPos());
 
   }
 
 
-  private manageScrollPos() {
+  private manageScrollPos(): void {
 
     // update service property
     this.pos = window.pageYOffset;
 
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
 }
