@@ -61,6 +61,16 @@ The `animationName` attribute is for the name of the CSS class to be added at th
 </div>
 ```
 
+## offset attribute
+
+You can also optionally add an `offset` attribute (thanks `siegerx3`) to specify the number of pixels offset from the bottom of the viewport when the directive gets triggered on your element.  The default is 80 pixels and the value given would be just the number of pixels.
+
+```html
+  <div class="animated" animateOnScroll animationName="slideDown" offset="120">
+    content with different pixel offset specified
+  </div>
+```
+
 ## Demo
 
 An example of usage of the directory can be found at:
