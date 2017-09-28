@@ -17,6 +17,9 @@ npm-debug.log
 # VS Code
 .vscode/*
 
+# Visual Studio
+.vs/*
+
 # Windows
 Thumbs.db
 Desktop.ini
