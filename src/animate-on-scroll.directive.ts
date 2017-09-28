@@ -14,6 +14,8 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   @Input() animationName: string; // use fadeIn as default if not specified
+  // Pixel offset from screen bottom to the animated element to determine the start of the animation
+  @Input() offset: number = 80;
 
   constructor(private elementRef: ElementRef, private renderer: Renderer, private scroll: ScrollService) { }
 
@@ -54,7 +56,7 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy {
     this.getOffsetTop();
 
     // we should trigger the addition of the animation class a little after getting to the element
-    const scrollTrigger = this.offsetTop + 80 - this.winHeight;
+    const scrollTrigger = this.offsetTop + this.offset - this.winHeight;
 
     // using values updated in service
     if (!this.isVisible && this.scroll.pos >= scrollTrigger) {
