@@ -29,11 +29,11 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy {
 
     // subscribe to scroll event using service
     this.scroll.scrollObs.takeUntil(this.ngUnsubscribe)
-                         .subscribe(() => this.manageVisibility());
+      .subscribe(() => this.manageVisibility());
 
     // subscribe to resize event using service so scrolling position is always accurate
     this.scroll.resizeObs.takeUntil(this.ngUnsubscribe)
-                         .subscribe(() => this.manageVisibility());
+      .subscribe(() => this.manageVisibility());
 
   }
 
@@ -44,7 +44,7 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy {
 
   /**
    * check for visibility of element in viewport to add animation
-   * 
+   *
    * @returns void
    */
   private manageVisibility(): void {
@@ -67,7 +67,7 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy {
 
   /**
    * utility function to mark element visible and add css class
-   * 
+   *
    * @returns void
    */
   private addAnimationClass(): void {
@@ -81,7 +81,7 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy {
 
   /**
    * utility function to add css class to element in DOM
-   * 
+   *
    * @param  {string} classname
    * @returns void
    */
@@ -102,7 +102,7 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy {
 
   /**
    * get offsetTop value for element
-   * 
+   *
    * @returns void
    */
   private getOffsetTop(): void {

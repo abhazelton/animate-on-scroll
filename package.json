@@ -5,7 +5,9 @@
   "main": "index.js",
   "typings": "./index.d.ts",
   "scripts": {
-    "prepublish": "tsc"
+    "prepublish": "build",
+    "build": "tsc",
+    "lint": "tslint --project tsconfig.json"
   },
   "repository": {
     "type": "git",
@@ -25,18 +27,18 @@
   },
   "homepage": "https://github.com/abhazelton/animate-on-scroll#readme",
   "devDependencies": {
-    "@angular/common": "^4.0.1",
-    "@angular/compiler": "^4.0.1",
-    "@angular/core": "^4.0.1",
-    "@angular/platform-browser": "^4.0.1",
-    "@types/core-js": "^0.9.36",
-    "@types/es6-shim": "^0.31.32",
-    "codelyzer": "^2.1.1",
-    "core-js": "^2.4.1",
+    "@angular/common": "^4.4.4",
+    "@angular/compiler": "^4.4.4",
+    "@angular/core": "^4.4.4",
+    "@angular/platform-browser": "^4.4.4",
+    "@types/core-js": "^0.9.43",
+    "@types/es6-shim": "^0.31.35",
+    "codelyzer": "^3.2.1",
+    "core-js": "^2.5.1",
     "es6-shim": "^0.35.3",
-    "rxjs": "^5.3.0",
-    "tslint": "^5.0.0",
-    "typescript": "^2.2.2",
-    "zone.js": "^0.8.5"
+    "rxjs": "^5.4.3",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.3",
+    "zone.js": "^0.8.18"
   }
 }
