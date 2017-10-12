@@ -5,7 +5,7 @@
   "main": "index.js",
   "typings": "./index.d.ts",
   "scripts": {
-    "prepublish": "build",
+    "prepublish": "npm run build",
     "build": "tsc",
     "lint": "tslint --project tsconfig.json"
   },
