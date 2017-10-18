@@ -47,7 +47,7 @@ Use the directive in your component template:
 
 ## animationName attribute
 
-The `animationName` attribute is for the name of the CSS class to be added at the time the element appears.  Here is a real-world example if you were using the Animate.css library in your project:
+Required. The `animationName` attribute is for the name(s) of the CSS class(es) to be added at the time the element appears.  Here is a real-world example if you were using the Animate.css library in your project:
 
 ```html
 <div class="container">
@@ -61,12 +61,51 @@ The `animationName` attribute is for the name of the CSS class to be added at th
 </div>
 ```
 
-## offset attribute
-
-You can also optionally add an `offset` attribute (thanks `siegerx3`) to specify the number of pixels offset from the bottom of the viewport when the directive gets triggered on your element.  The default is 80 pixels and the value given would be just the number of pixels.
+or
 
 ```html
-  <div class="animated" animateOnScroll animationName="slideDown" offset="120">
+<div class="container">
+
+  long scrolling content..
+
+  <div animateOnScroll animationName="animated fadeIn">
+    animated content upon appearing in the viewport..
+  </div>
+
+</div>
+```
+
+### Animate.css Peculiarity
+
+If you're using Animate.css with this component and you're trying to animate an element IN to view (fadeIn, slideInLeft etc), you may experience "flashing" when the element scrolls into the viewport (i.e. the element will be shown, then be hidden, then animate into view). This can be mitigated by overriding Animate.css's `.animated` class, then applying `visibility: hidden;` to the element you want to hide:
+
+```css
+.animated {
+    visibility: visible !important;
+}
+.hide-on-init {
+    visibility: hidden;
+}
+```
+
+```html
+<div class="container">
+
+  long scrolling content..
+
+  <div class="hide-on-init" animateOnScroll animationName="animated fadeIn">
+    animated content upon appearing in the viewport..
+  </div>
+
+</div>
+```
+
+## offset attribute
+
+You can also optionally add an `offset` attribute (thanks `siegerx3`) to specify the number of pixels you would need to scroll to *below* the top of the element for the animation to activate. The default is 80 pixels and the value given can be positive or negative.
+
+```html
+  <div animateOnScroll animationName="animated slideDown" offset="120">
     content with different pixel offset specified
   </div>
 ```

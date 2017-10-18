@@ -1,4 +1,4 @@
-import { Directive, Input, Renderer, ElementRef, OnInit, OnDestroy } from '@angular/core';
+import { Directive, Input, Renderer, ElementRef, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { ScrollService } from './scroll.service';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/takeUntil';
@@ -6,12 +6,16 @@ import 'rxjs/add/operator/takeUntil';
 @Directive({
   selector: '[animateOnScroll]'
 })
-export class AnimateOnScrollDirective implements OnInit, OnDestroy {
+export class AnimateOnScrollDirective implements OnInit, OnDestroy, AfterViewInit {
 
   private offsetTop: number;
   private isVisible: boolean;
   private winHeight: number;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
+
+  private get id(): string {
+    return this.elementRef.nativeElement.id;
+  }
 
   @Input() animationName: string; // use fadeIn as default if not specified
   // Pixel offset from screen bottom to the animated element to determine the start of the animation
@@ -20,12 +24,11 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy {
   constructor(private elementRef: ElementRef, private renderer: Renderer, private scroll: ScrollService) { }
 
   ngOnInit(): void {
-
+    if (!this.animationName) {
+      throw new Error('animationName required');
+    }
     // default visibility to false
     this.isVisible = false;
-
-    // run visibility check initially in case the element is already visible in viewport
-    this.manageVisibility();
 
     // subscribe to scroll event using service
     this.scroll.scrollObs.takeUntil(this.ngUnsubscribe)
@@ -35,6 +38,11 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy {
     this.scroll.resizeObs.takeUntil(this.ngUnsubscribe)
       .subscribe(() => this.manageVisibility());
 
+  }
+
+  ngAfterViewInit(): void {
+    // run visibility check initially in case the element is already visible in viewport
+    setTimeout(() => this.manageVisibility(), 1);
   }
 
   ngOnDestroy(): void {
@@ -49,6 +57,11 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy {
    */
   private manageVisibility(): void {
 
+    if (this.isVisible) {
+      // Optimisation; nothing to do if class has already been applied
+      return;
+    }
+
     // check for window height, may change with a window resize
     this.getWinHeight();
 
@@ -56,10 +69,10 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy {
     this.getOffsetTop();
 
     // we should trigger the addition of the animation class a little after getting to the element
-    const scrollTrigger = this.offsetTop + this.offset - this.winHeight;
+    const scrollTrigger = this.offsetTop + +this.offset - this.winHeight;
 
     // using values updated in service
-    if (!this.isVisible && this.scroll.pos >= scrollTrigger) {
+    if (this.scroll.pos >= scrollTrigger) {
       this.addAnimationClass();
     }
 
@@ -77,16 +90,21 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy {
 
     // use default for animate.css if no value provided
     this.setClass(this.animationName);
+
   }
 
   /**
-   * utility function to add css class to element in DOM
+   * utility function to add one or more css classes to element in DOM
    *
-   * @param  {string} classname
+   * @param  {string} classes
    * @returns void
    */
-  private setClass(classname: string): void {
-    this.renderer.setElementClass(this.elementRef.nativeElement, classname, true);
+  private setClass(classes: string): void {
+
+    for (const c of classes.split(' ')) {
+      this.renderer.setElementClass(this.elementRef.nativeElement, c, true);
+    }
+
   }
 
   /**
@@ -96,7 +114,7 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy {
    */
   private getWinHeight(): void {
 
-    this.winHeight = window.screen.height;
+    this.winHeight = window.innerHeight;
 
   }
 
