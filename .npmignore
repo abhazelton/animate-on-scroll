@@ -28,3 +28,6 @@ Desktop.ini
 
 #tslint
 tslint.json
+
+# ignore src files
+src/

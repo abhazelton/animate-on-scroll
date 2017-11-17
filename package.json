@@ -2,8 +2,8 @@
   "name": "ng2-animate-on-scroll",
   "version": "1.0.6",
   "description": "Angular directive that adds css animations on elements once they are reached via scrolling",
-  "main": "index.js",
-  "typings": "./index.d.ts",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
   "scripts": {
     "prepublish": "npm run build",
     "build": "tsc",
