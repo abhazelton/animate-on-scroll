@@ -30,3 +30,6 @@ Desktop.ini
 
 # compiled files
 dist/
+/compiled/
+*.metadata.json
+*.tgz

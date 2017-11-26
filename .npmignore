@@ -32,3 +32,6 @@ tslint.json
 # ignore src files
 src/
 index.ts
+
+# ignore compiles files
+/compiled
