@@ -1,7 +1,6 @@
 import { Directive, Input, Renderer, ElementRef, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { ScrollService } from './scroll.service';
-import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/operator/takeUntil';
+import { Subscription } from 'rxjs';
 
 @Directive({
   selector: '[animateOnScroll]'
@@ -11,7 +10,8 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy, AfterViewIni
   private offsetTop: number;
   private isVisible: boolean;
   private winHeight: number;
-  private ngUnsubscribe: Subject<void> = new Subject<void>();
+  private scrollSub: Subscription = new Subscription();
+  private resizeSub: Subscription = new Subscription();
 
   private get id(): string {
     return this.elementRef.nativeElement.id;
@@ -31,11 +31,11 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy, AfterViewIni
     this.isVisible = false;
 
     // subscribe to scroll event using service
-    this.scroll.scrollObs.takeUntil(this.ngUnsubscribe)
+    this.scrollSub = this.scroll.scrollObs
       .subscribe(() => this.manageVisibility());
 
     // subscribe to resize event using service so scrolling position is always accurate
-    this.scroll.resizeObs.takeUntil(this.ngUnsubscribe)
+    this.resizeSub = this.scroll.resizeObs
       .subscribe(() => this.manageVisibility());
 
   }
@@ -46,8 +46,8 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy, AfterViewIni
   }
 
   ngOnDestroy(): void {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
+    this.scrollSub.unsubscribe();
+    this.resizeSub.unsubscribe();
   }
 
   /**
