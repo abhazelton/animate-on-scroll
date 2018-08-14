@@ -2,8 +2,6 @@ import { Directive, Input, Renderer, ElementRef, OnInit, OnDestroy, AfterViewIni
 import { ScrollService } from './scroll.service';
 import { Subscription } from 'rxjs';
 
-
-
 @Directive({
   selector: '[animateOnScroll]'
 })
