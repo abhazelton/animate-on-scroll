@@ -1,5 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { Observable, Subscription, fromEvent } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { fromEvent } from 'rxjs/observable/fromEvent';
 
 @Injectable()
 export class ScrollService implements OnDestroy {
