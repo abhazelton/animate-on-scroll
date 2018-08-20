@@ -69,7 +69,7 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy, AfterViewIni
     this.getOffsetTop();
 
     // we should trigger the addition of the animation class a little after getting to the element
-    const scrollTrigger = this.offsetTop + +this.offset - this.winHeight;
+    const scrollTrigger = this.offsetTop + this.offset - this.winHeight;
 
     // using values updated in service
     if (this.scroll.pos >= scrollTrigger) {
