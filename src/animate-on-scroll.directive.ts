@@ -1,4 +1,4 @@
-import { Directive, Input, Renderer, ElementRef, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Directive, Input, Renderer, ElementRef, OnInit, OnDestroy, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { ScrollService } from './scroll.service';
 import { Subscription } from 'rxjs';
 
@@ -20,6 +20,8 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy, AfterViewIni
   @Input() animationName: string; // use fadeIn as default if not specified
   // Pixel offset from screen bottom to the animated element to determine the start of the animation
   @Input() offset: number = 80;
+  // call back after animation is complete
+  @Output() finished: EventEmitter<any> = new EventEmitter();
 
   constructor(private elementRef: ElementRef, private renderer: Renderer, private scroll: ScrollService) { }
 
@@ -103,8 +105,26 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy, AfterViewIni
 
     for (const c of classes.split(' ')) {
       this.renderer.setElementClass(this.elementRef.nativeElement, c, true);
+      this.callBackEmit(this.elementRef.nativeElement);
     }
 
+  }
+
+  /**
+   * After setClass add css to element, inspect the durtion + delay and dispatch event emit callback
+   *
+   * @param  {Element} classes
+   * @returns void
+   */
+  private callBackEmit(element: Element): void {
+    // all time properties are in 's' second
+    const css = window.getComputedStyle(this.elementRef.nativeElement);
+    const animDuration: string = css.getPropertyValue('animation-duration');
+    const animDelay: string = css.getPropertyValue('animation-delay');
+    const time: number = parseFloat( animDelay.split('s')[0] ) + parseFloat( animDuration.split('s')[0] );
+    setTimeout(() => {
+      this.finished.emit(null);
+    }, time * 1000 );
   }
 
   /**
