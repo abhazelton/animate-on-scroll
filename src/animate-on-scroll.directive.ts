@@ -114,7 +114,7 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy, AfterViewIni
    */
   private getWinHeight(): void {
 
-    this.winHeight = window ?  window.innerHeight : 0;
+    this.winHeight = typeof window !== 'undefined' ?  window.innerHeight : 0;
 
   }
 

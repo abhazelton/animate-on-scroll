@@ -35,7 +35,7 @@ export class ScrollService implements OnDestroy {
   private manageScrollPos(): void {
 
     // update service property
-    this.pos = window ? window.pageYOffset : 0;
+    this.pos = typeof window !== 'undefined' ? window.pageYOffset : 0;
 
   }
 
