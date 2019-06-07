@@ -1,3 +1,8 @@
+# Interested in taking over this project?
+
+I haven't had time to maintain this project, and have all but stopped working on Angular projects, so if someone would like to take this over, I'm happy to transfer it over.  Please contact me if interested.
+
+
 # ng2-animate-on-scroll
 
 A very simple Angular directive with no dependencies that allows you to add CSS animations on elements, once that element has been reached via scrolling the page.  Works with whatever CSS animation you choose, including Animate.css as shown in examples.
