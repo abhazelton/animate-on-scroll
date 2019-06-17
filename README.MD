@@ -1,7 +1,7 @@
 # Project Status
 
 This project is in maintenance mode. Only bug fixes and new Angular version support is actively developed.
-If you'd like new features, consider helping maintaining the project.
+If you'd like new features, consider helping maintain the project.
 
 # ng2-animate-on-scroll
 
