@@ -1,7 +1,7 @@
-# Interested in taking over this project?
+# Project Status
 
-I haven't had time to maintain this project, and have all but stopped working on Angular projects, so if someone would like to take this over, I'm happy to transfer it over.  Please contact me if interested.
-
+This project is in maintenance mode. Only bug fixes and new Angular version support is actively developed.
+If you'd like new features, consider helping maintaining the project.
 
 # ng2-animate-on-scroll
 
