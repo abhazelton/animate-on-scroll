@@ -131,7 +131,7 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy, AfterViewIni
       // get vertical position for selected element
       this.offsetTop = viewportTop + this.scroll.pos - clientTop;
     } else {
-      this.offsetTop = 0
+      this.offsetTop = 0;
     }
 
   }

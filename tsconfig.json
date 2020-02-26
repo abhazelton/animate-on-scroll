@@ -1,31 +1,32 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
-    "noImplicitAny": true,
-    "module": "commonjs",
-    "target": "ES5",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
     "sourceMap": true,
-    "declaration": true,
-    "outDir": "./dist",
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
     "typeRoots": [
       "node_modules/@types"
     ],
-    "types" : [
-      "core-js"
+    "lib": [
+      "es2018",
+      "dom"
     ],
-    "lib": [ "es2015", "dom" ]
+    "paths": {
+      "ng2-animate-on-scroll": [
+        "dist/ng2-animate-on-scroll/ng2-animate-on-scroll",
+        "dist/ng2-animate-on-scroll"
+      ]
+    }
   },
-  "files": [
-    "index.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "**/*.spec.ts"
-  ],
   "angularCompilerOptions": {
-    "strictMetadataEmit": true,
-	"genDir": "compiled"
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
   }
 }
