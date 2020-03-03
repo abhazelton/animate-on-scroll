@@ -115,10 +115,10 @@ You can also optionally add an `offset` attribute (thanks `siegerx3`) to specify
   </div>
 ```
 
-## Developing ng2-animate-on-scroll with the demo application
+## Demo
 
-1. After cloning this repo, install dependencies with `npm install`.
-2. The command `npm run watch` will build the library in watch mode (you can alternately use `npm run build:lib` if you prefer not to run in watch mode). 3. Finally, `npm run start` will start the server for the demo app. If you prefer you can use `npm run dev:ssr` to start the demo in server rendered mode using Angular Universal.
+An example of usage of the directory can be found at:
+[https://github.com/abhazelton/animate-on-scroll-test](https://github.com/abhazelton/animate-on-scroll-test)
 
 ## License
 

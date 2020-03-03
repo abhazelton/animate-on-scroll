@@ -1,0 +1,27 @@
+{
+  "name": "ng2-animate-on-scroll",
+  "version": "2.0.0",
+  "description": "Angular directive that adds css animations on elements once they are reached via scrolling",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abhazelton/animate-on-scroll.git"
+  },
+  "keywords": [
+    "css",
+    "animation",
+    "angular",
+    "scrolling",
+    "directive"
+  ],
+  "author": "Aaron Hazelton",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/abhazelton/animate-on-scroll/issues"
+  },
+  "homepage": "https://github.com/abhazelton/animate-on-scroll#readme",
+  "peerDependencies": {
+    "@angular/common": "^9.0.2",
+    "@angular/core": "^9.0.2",
+    "tslib": "^1.10.0"
+  }
+}

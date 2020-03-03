@@ -1,8 +1,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AnimateOnScrollDirective, ScrollService } from './src';
-
-export * from './src/animate-on-scroll.directive';
+import { AnimateOnScrollDirective } from './animate-on-scroll.directive';
+import { ScrollService } from './scroll.service';
 
 @NgModule({
   imports: [
