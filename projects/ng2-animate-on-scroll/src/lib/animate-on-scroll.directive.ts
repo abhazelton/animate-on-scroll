@@ -17,7 +17,7 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy, AfterViewIni
     return this.elementRef.nativeElement.id;
   }
 
-  @Input() animationName: string; // use fadeIn as default if not specified
+  @Input() animationName: string | null; // use fadeIn as default if not specified, specify null for no animation
   // Pixel offset from screen bottom to the animated element to determine the start of the animation
   @Input() offset: number = 80;
 
@@ -25,7 +25,7 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy, AfterViewIni
 
   ngOnInit(): void {
     if (!this.animationName) {
-      throw new Error('animationName required');
+      return;
     }
     // default visibility to false
     this.isVisible = false;
@@ -84,7 +84,10 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy, AfterViewIni
    * @returns void
    */
   private addAnimationClass(): void {
-
+    // stops execution if no class is provided
+    if(!this.animationName)
+      return;
+    
     // mark this element visible, we won't remove the class after this
     this.isVisible = true;
 
