@@ -30,6 +30,24 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy, AfterViewIni
     // default visibility to false
     this.isVisible = false;
 
+    // using intersecting observer by default, else fallback to scroll Listener
+    if ('IntersectionObserver' in window) {
+      const options = {
+        root:null,
+        threshold:0.5,
+        rootMargin:"0px"
+      }
+      const observer:IntersectionObserver =new IntersectionObserver((entries,observer)=>{
+        entries.forEach(entry=>{
+          if(!entry.isIntersecting)
+            return;
+          this.addAnimationClass();
+        })
+      },options);
+      observer.observe(this.elementRef.nativeElement);  
+      return;
+    }
+    
     // subscribe to scroll event using service
     this.scrollSub = this.scroll.scrollObs
       .subscribe(() => this.manageVisibility());
