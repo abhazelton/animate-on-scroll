@@ -20,7 +20,6 @@
     ],
     "paths": {
       "ng2-animate-on-scroll": [
-        "dist/ng2-animate-on-scroll/ng2-animate-on-scroll",
         "dist/ng2-animate-on-scroll"
       ]
     }

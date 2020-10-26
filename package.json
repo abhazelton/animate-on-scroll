@@ -1,6 +1,10 @@
 {
   "name": "animate-on-scroll-sample-project",
   "version": "0.0.0",
+  "author": {
+    "name": "Aaron Hazelton",
+    "email": "abhazelton@gmail.com"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

@@ -13,7 +13,10 @@
     "scrolling",
     "directive"
   ],
-  "author": "Aaron Hazelton",
+  "author": {
+    "name": "Aaron Hazelton",
+    "email": "abhazelton@gmail.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/abhazelton/animate-on-scroll/issues"
