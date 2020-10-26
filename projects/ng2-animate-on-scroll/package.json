@@ -17,6 +17,9 @@
     "name": "Aaron Hazelton",
     "email": "abhazelton@gmail.com"
   },
+  "maintainers": [
+    "Abhirup Pal(abhiruppalmethodist@gmail.com)"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/abhazelton/animate-on-scroll/issues"
