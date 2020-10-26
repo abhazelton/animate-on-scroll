@@ -52,7 +52,7 @@ Use the directive in your component template:
 
 ## animationName attribute
 
-Required. The `animationName` attribute is for the name(s) of the CSS class(es) to be added at the time the element appears.  Here is a real-world example if you were using the Animate.css library in your project:
+**(Optional)**. The `animationName` attribute is for the name(s) of the CSS class(es) to be added at the time the element appears. In cases when no animation is required (e.g in a ngif case) specify null. Here is a real-world example if you were using the Animate.css library in your project:
 
 ```html
 <div class="container">
