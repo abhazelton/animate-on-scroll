@@ -19,7 +19,9 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy, AfterViewIni
 
   @Input() animationName: string | null; // use fadeIn as default if not specified, specify null for no animation
   // Pixel offset from screen bottom to the animated element to determine the start of the animation
-  @Input() offset: number = 80;
+  @Input() offset: number = 80; //for scroll Listener
+  @Input() useScroll?:boolean;
+  @Input() threshold ?: number; // for intersection observer only for the time being
 
   constructor(private elementRef: ElementRef, private renderer: Renderer2, private scroll: ScrollService) { }
 
@@ -29,12 +31,13 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy, AfterViewIni
     }
     // default visibility to false
     this.isVisible = false;
-
+    this.useScroll = this.useScroll ? this.useScroll : ((this.useScroll === false) ? false : true);
+    this.threshold = this.threshold ? this.threshold | 0 : 0.5;
     // using intersecting observer by default, else fallback to scroll Listener
-    if ('IntersectionObserver' in window) {
-      const options = {
+    if ("IntersectionObserver" in window && this.useScroll) {
+      const options:IntersectionObserverInit = {
         root:null,
-        threshold:0.5,
+        threshold:this.threshold,
         rootMargin:"0px"
       }
       const observer:IntersectionObserver =new IntersectionObserver((entries,observer)=>{
