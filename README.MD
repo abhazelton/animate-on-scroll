@@ -110,6 +110,14 @@ You can also optionally add an `offset` attribute (thanks `siegerx3`) to specify
     content with different pixel offset specified
   </div>
 ```
+## Options available
+| Options | Type | Comments |
+|:------------:|:-------------:|:-------------:|
+| animationName | string/null | Add animation class or null in case no animation is required |
+| offset | number | For scroll Listener, to add offsets |
+| useScroll | boolean | Add for using scroll Listener, default is true and uses intersection observer |
+| threshold | number | Add threshold value for intersection observer only |
+
 
 ## Developing ng2-animate-on-scroll with the demo application
 
