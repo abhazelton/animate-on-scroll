@@ -11,7 +11,9 @@
       <div
         class="card"
         animateOnScroll
-        animationName="null"
+        [animationName]=null
+        threshold="0"
+        [useScroll]="false"
       >
         <div class="card-block">
           <div class="card-title">
@@ -29,6 +31,7 @@
         class="card hide-on-init animated-delay-1"
         animateOnScroll
         animationName="animated fadeInDown"
+        threshold="0.5"
       >
         <div class="card-block">
           <div class="card-title">
