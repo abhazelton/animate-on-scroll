@@ -15,7 +15,7 @@ import { ScrollService } from './scroll.service';
   ]
 })
 export class AnimateOnScrollModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<AnimateOnScrollModule> {
     return {
       ngModule: AnimateOnScrollModule,
       providers: [ ScrollService ]

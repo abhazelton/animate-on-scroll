@@ -19,8 +19,8 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy, AfterViewIni
 
   @Input() animationName: string | null; // use fadeIn as default if not specified, specify null for no animation
   // Pixel offset from screen bottom to the animated element to determine the start of the animation
-  @Input() offset: number = 80; //for scroll Listener
-  @Input() useScroll?:boolean;
+  @Input() offset: number = 80; // for scroll Listener
+  @Input() useScroll?: boolean;
   @Input() threshold ?: number; // for intersection observer only for the time being
 
   constructor(private elementRef: ElementRef, private renderer: Renderer2, private scroll: ScrollService) { }
@@ -32,25 +32,26 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy, AfterViewIni
     // default visibility to false
     this.isVisible = false;
     this.useScroll = this.useScroll ? this.useScroll : ((this.useScroll === false) ? false : true);
-    this.threshold = this.threshold ? this.threshold | 0.5 : 0.5;
+    this.threshold = this.threshold ? (this.threshold || 0.5) : 0.5;
     // using intersecting observer by default, else fallback to scroll Listener
-    if ("IntersectionObserver" in window && this.useScroll) {
-      const options:IntersectionObserverInit = {
-        root:null,
-        threshold:this.threshold,
-        rootMargin:"0px"
-      }
-      const observer:IntersectionObserver =new IntersectionObserver((entries,observer)=>{
-        entries.forEach(entry=>{
-          if(!entry.isIntersecting)
+    if ('IntersectionObserver' in window && this.useScroll) {
+      const options: IntersectionObserverInit = {
+        root: null,
+        threshold: this.threshold,
+        rootMargin: '0px'
+      };
+      const observer: IntersectionObserver = new IntersectionObserver((entries, _) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) {
             return;
+          }
           this.addAnimationClass();
-        })
-      },options);
-      observer.observe(this.elementRef.nativeElement);  
+        });
+      }, options);
+      observer.observe(this.elementRef.nativeElement);
       return;
     }
-    
+
     // subscribe to scroll event using service
     this.scrollSub = this.scroll.scrollObs
       .subscribe(() => this.manageVisibility());
@@ -106,9 +107,10 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy, AfterViewIni
    */
   private addAnimationClass(): void {
     // stops execution if no class is provided
-    if(!this.animationName)
+    if (!this.animationName) {
       return;
-    
+    }
+
     // mark this element visible, we won't remove the class after this
     this.isVisible = true;
 
