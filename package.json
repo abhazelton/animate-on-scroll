@@ -5,6 +5,9 @@
     "name": "Aaron Hazelton",
     "email": "abhazelton@gmail.com"
   },
+  "contributors": [
+    "abhiruppalmethodist@gmail.com"
+  ],
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -19,7 +22,7 @@
     "prerender": "ng run animate-on-scroll-sample-project:prerender",
     "watch": "ng build ng2-animate-on-scroll --watch"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/animations": "~10.2.4",
     "@angular/common": "~10.2.4",
