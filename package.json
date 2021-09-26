@@ -1,6 +1,6 @@
 {
   "name": "ng2-animate-on-scroll",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "author": {
     "name": "Aaron Hazelton",
     "email": "abhazelton@gmail.com"
@@ -22,7 +22,6 @@
     "prerender": "ng run animate-on-scroll-sample-project:prerender",
     "watch": "ng build ng2-animate-on-scroll --watch"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "^12.0.0",
     "@angular/common": "^12.0.0",
