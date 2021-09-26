@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "animate-on-scroll-sample-project": {
@@ -99,15 +99,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
             ]
           }
         },
@@ -202,18 +198,19 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ng2-animate-on-scroll/tsconfig.lib.json",
-              "projects/ng2-animate-on-scroll/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ng2-animate-on-scroll/**/*.ts",
+              "projects/ng2-animate-on-scroll/**/*.html"
             ]
           }
         }
       }
-    }},
-  "defaultProject": "animate-on-scroll-sample-project"
+    }
+  },
+  "defaultProject": "animate-on-scroll-sample-project",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }

@@ -1,18 +1,16 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
 
-import { AppComponent } from './app.component';
-import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
+import { AppComponent } from "./app.component";
+import { AnimateOnScrollModule } from "ng2-animate-on-scroll";
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
-    AnimateOnScrollModule.forRoot()
+    BrowserModule.withServerTransition({ appId: "serverApp" }),
+    AnimateOnScrollModule.forRoot(),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
