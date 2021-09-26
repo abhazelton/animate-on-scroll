@@ -1,12 +1,22 @@
-import { Directive, Input, Renderer2, ElementRef, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
-import { ScrollService } from './scroll.service';
-import { Subscription } from 'rxjs';
+import {
+  Directive,
+  Input,
+  Renderer2,
+  ElementRef,
+  OnInit,
+  OnDestroy,
+  AfterViewInit,
+} from "@angular/core";
+import { ScrollService } from "./scroll.service";
+import { Subscription } from "rxjs";
 
 @Directive({
-  selector: '[animateOnScroll]'
+  // eslint-disable-next-line @angular-eslint/directive-selector
+  selector: "[animateOnScroll]",
 })
-export class AnimateOnScrollDirective implements OnInit, OnDestroy, AfterViewInit {
-
+export class AnimateOnScrollDirective
+  implements OnInit, OnDestroy, AfterViewInit
+{
   private offsetTop: number;
   private isVisible: boolean;
   private winHeight: number;
@@ -21,9 +31,13 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy, AfterViewIni
   // Pixel offset from screen bottom to the animated element to determine the start of the animation
   @Input() offset: number = 80; // for scroll Listener
   @Input() useScroll?: boolean;
-  @Input() threshold ?: number; // for intersection observer only for the time being
+  @Input() threshold?: number; // for intersection observer only for the time being
 
-  constructor(private elementRef: ElementRef, private renderer: Renderer2, private scroll: ScrollService) { }
+  constructor(
+    private elementRef: ElementRef,
+    private renderer: Renderer2,
+    private scroll: ScrollService
+  ) {}
 
   ngOnInit(): void {
     if (!this.animationName) {
@@ -31,35 +45,43 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy, AfterViewIni
     }
     // default visibility to false
     this.isVisible = false;
-    this.useScroll = this.useScroll ? this.useScroll : ((this.useScroll === false) ? false : true);
-    this.threshold = this.threshold ? (this.threshold || 0.5) : 0.5;
+    this.useScroll = this.useScroll
+      ? this.useScroll
+      : this.useScroll === false
+      ? false
+      : true;
+    this.threshold = this.threshold ? this.threshold || 0.5 : 0.5;
     // using intersecting observer by default, else fallback to scroll Listener
-    if ('IntersectionObserver' in window && this.useScroll) {
+    if ("IntersectionObserver" in window && this.useScroll) {
       const options: IntersectionObserverInit = {
         root: null,
         threshold: this.threshold,
-        rootMargin: '0px'
+        rootMargin: "0px",
       };
-      const observer: IntersectionObserver = new IntersectionObserver((entries, _) => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) {
-            return;
-          }
-          this.addAnimationClass();
-        });
-      }, options);
+      const observer: IntersectionObserver = new IntersectionObserver(
+        (entries, _) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) {
+              return;
+            }
+            this.addAnimationClass();
+          });
+        },
+        options
+      );
       observer.observe(this.elementRef.nativeElement);
       return;
     }
 
     // subscribe to scroll event using service
-    this.scrollSub = this.scroll.scrollObs
-      .subscribe(() => this.manageVisibility());
+    this.scrollSub = this.scroll.scrollObs.subscribe(() =>
+      this.manageVisibility()
+    );
 
     // subscribe to resize event using service so scrolling position is always accurate
-    this.resizeSub = this.scroll.resizeObs
-      .subscribe(() => this.manageVisibility());
-
+    this.resizeSub = this.scroll.resizeObs.subscribe(() =>
+      this.manageVisibility()
+    );
   }
 
   ngAfterViewInit(): void {
@@ -78,7 +100,6 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy, AfterViewIni
    * @returns void
    */
   private manageVisibility(): void {
-
     if (this.isVisible) {
       // Optimisation; nothing to do if class has already been applied
       return;
@@ -97,7 +118,6 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy, AfterViewIni
     if (this.scroll.pos >= scrollTrigger) {
       this.addAnimationClass();
     }
-
   }
 
   /**
@@ -116,7 +136,6 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy, AfterViewIni
 
     // use default for animate.css if no value provided
     this.setClass(this.animationName);
-
   }
 
   /**
@@ -126,11 +145,9 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy, AfterViewIni
    * @returns void
    */
   private setClass(classes: string): void {
-
-    for (const c of classes.split(' ')) {
+    for (const c of classes.split(" ")) {
       this.renderer.addClass(this.elementRef.nativeElement, c);
     }
-
   }
 
   /**
@@ -139,9 +156,7 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy, AfterViewIni
    * @returns void
    */
   private getWinHeight(): void {
-
-    this.winHeight = typeof window !== 'undefined' ?  window.innerHeight : 0;
-
+    this.winHeight = typeof window !== "undefined" ? window.innerHeight : 0;
   }
 
   /**
@@ -150,8 +165,11 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy, AfterViewIni
    * @returns void
    */
   private getOffsetTop(): void {
-    if (typeof this.elementRef.nativeElement.getBoundingClientRect === 'function') {
-      const viewportTop = this.elementRef.nativeElement.getBoundingClientRect().top;
+    if (
+      typeof this.elementRef.nativeElement.getBoundingClientRect === "function"
+    ) {
+      const viewportTop =
+        this.elementRef.nativeElement.getBoundingClientRect().top;
       const clientTop = this.elementRef.nativeElement.clientTop;
 
       // get vertical position for selected element
@@ -159,7 +177,5 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy, AfterViewIni
     } else {
       this.offsetTop = 0;
     }
-
   }
-
 }
