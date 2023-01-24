@@ -5,10 +5,11 @@ import {
   ElementRef,
   OnInit,
   OnDestroy,
-  AfterViewInit,
-} from "@angular/core";
+  AfterViewInit, Inject, PLATFORM_ID,
+} from '@angular/core';
 import { ScrollService } from "./scroll.service";
 import { Subscription } from "rxjs";
+import {isPlatformServer} from '@angular/common';
 
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector
@@ -36,10 +37,15 @@ export class AnimateOnScrollDirective
   constructor(
     private elementRef: ElementRef,
     private renderer: Renderer2,
-    private scroll: ScrollService
+    private scroll: ScrollService,
+    @Inject(PLATFORM_ID) private platformId: any,
+
   ) {}
 
   ngOnInit(): void {
+    if (isPlatformServer(this.platformId)) {
+      return;
+    }
     if (!this.animationName) {
       return;
     }
@@ -85,6 +91,9 @@ export class AnimateOnScrollDirective
   }
 
   ngAfterViewInit(): void {
+    if (isPlatformServer(this.platformId)) {
+      return;
+    }
     // run visibility check initially in case the element is already visible in viewport
     setTimeout(() => this.manageVisibility(), 1);
   }
