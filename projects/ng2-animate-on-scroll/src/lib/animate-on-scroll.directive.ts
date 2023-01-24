@@ -91,6 +91,9 @@ export class AnimateOnScrollDirective
   }
 
   ngAfterViewInit(): void {
+    if (isPlatformServer(this.platformId)) {
+      return;
+    }
     // run visibility check initially in case the element is already visible in viewport
     setTimeout(() => this.manageVisibility(), 1);
   }
