@@ -8236,8 +8236,8 @@ typescript@^3.9.3:
   resolved "https://registry.npmjs.org/typescript/-/typescript-3.9.10.tgz"
 
 ua-parser-js@^0.7.18, ua-parser-js@^0.7.28:
-  version "0.7.28"
-  resolved "https://registry.npmjs.org/ua-parser-js/-/ua-parser-js-0.7.28.tgz"
+  version "0.7.33"
+  resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.33.tgz#1d04acb4ccef9293df6f70f2c3d22f3030d8b532"
 
 ultron@~1.1.0:
   version "1.1.1"
